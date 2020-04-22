@@ -7,6 +7,8 @@ public class CreepyLook : MonoBehaviour
     public GameObject sphereToLook;
     public bool controlBothAxis = false;
     Vector3 cameraOffset;
+    public GameObject bulletPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,8 @@ public class CreepyLook : MonoBehaviour
         Vector3 pos = sphereToLook.transform.position;
         pos.y = this.transform.position.y;
         this.transform.LookAt(pos);
+
+
 
         if (controlBothAxis)
         {
@@ -39,5 +43,13 @@ public class CreepyLook : MonoBehaviour
         }
 
         Camera.main.transform.position = this.transform.position + cameraOffset;
+
+        if (Input.GetButtonDown("Jump")) {
+            GameObject bullet = Instantiate(bulletPrefab, this.transform.position, Quaternion.identity);
+            Rigidbody body = bullet.GetComponent<Rigidbody>();
+            Vector3 bulletDir = this.transform.TransformDirection(Vector3.forward);
+            body.AddForce(bulletDir * 30, ForceMode.Impulse);
+        }
+
     }
 }
