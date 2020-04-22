@@ -15,7 +15,14 @@ public class CreepyLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.LookAt(sphereToLook.transform.position);
+        Vector3 pos = sphereToLook.transform.position;
+        pos.y = this.transform.position.y;
+        this.transform.LookAt(pos);
+
+        float vert = Input.GetAxis("Vertical");
+        Vector3 myPos = this.transform.position;
+        myPos.z += vert;
+        this.transform.position = myPos;
 
     }
 }
