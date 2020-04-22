@@ -10,6 +10,14 @@ public class BulletController : MonoBehaviour
         Invoke("SelfDestroy", 2);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if( other.gameObject.layer.Equals("Enemies") )
+            Destroy(other.gameObject);
+        CancelInvoke("SelfDestroy");
+        SelfDestroy();
+    }
+
     void SelfDestroy()
     {
         Destroy(this.gameObject);

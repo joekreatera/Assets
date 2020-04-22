@@ -30,16 +30,14 @@ public class CreepyLook : MonoBehaviour
         {
             float vert = Input.GetAxis("Vertical");
             float horz = Input.GetAxis("Horizontal");
-            Vector3 myPos = this.transform.position;
-            myPos = myPos + (new Vector3(horz, 0, vert)) * 0.1f;
-            this.transform.position = myPos;
+
+         this.GetComponent<CharacterController>().Move((new Vector3(horz, 0, vert)) * 0.1f);
+            
         }
         else {
             float vert = Input.GetAxis("Vertical");
-            Vector3 myPos = this.transform.position;
             Vector3 dir = this.transform.TransformDirection(Vector3.forward);
-            myPos = myPos + dir * vert * 0.1f;
-            this.transform.position = myPos;
+            this.GetComponent<CharacterController>().Move(dir * vert * 0.1f);
         }
 
         Camera.main.transform.position = this.transform.position + cameraOffset;
